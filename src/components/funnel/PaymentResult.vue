@@ -17,7 +17,9 @@ const accessEmailMessage = ref('')
 const router = useRouter()
 
 const retryPayment = () => router.replace({ path: '/', hash: '#oferta' })
-const goToCommunityLogin = () => window.location.assign('https://luisapitabejarano.com/login')
+const goToCommunityLogin = () => {
+  window.open('https://luisapitabejarano.com/login', '_blank')
+}
 
 const sendAccessEmail = async () => {
   if (!clientTransactionId.value || sendingAccessEmail.value) return
