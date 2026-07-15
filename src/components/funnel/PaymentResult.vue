@@ -102,11 +102,13 @@ onMounted(async () => {
 <template>
   <Teleport to="body">
     <div v-if="status !== 'idle'" class="payment-result" :class="{ 'payment-result--error': status === 'error' }">
-      <section :class="{ 'payment-result__panel--error': status === 'error' }" role="status" aria-live="polite">
-        <span :class="{ 'payment-result__icon--error': status === 'error' }">{{ status === 'approved' ? '✓' : status === 'error' ? '!' : '···' }}</span>
+      <section :class="{ 'payment-result__panel--error': status === 'error', 'payment-result__panel--loading': status === 'confirming' }" role="status" aria-live="polite">
+        <span v-if="status === 'confirming'" class="payment-result__spinner" aria-hidden="true"></span>
+        <span v-else :class="{ 'payment-result__icon--error': status === 'error' }">{{ status === 'approved' ? '✓' : '!' }}</span>
         <small v-if="status === 'error'" class="payment-result__label">PAGO NO COMPLETADO</small>
+        <small v-else-if="status === 'confirming'" class="payment-result__label payment-result__label--loading">VALIDANDO CON PAYPHONE</small>
         <h2>{{ status === 'approved' ? '¡Bienvenida a Vital 360!' : status === 'error' ? 'Necesitamos revisar tu pago' : 'Confirmando tu pago' }}</h2>
-        <p>{{ status === 'confirming' ? 'No cierres esta ventana. Estamos validando la transacción con PayPhone.' : message }}</p>
+        <p>{{ status === 'confirming' ? 'No cierres ni recargues esta ventana. Estamos verificando tu transacción, esto toma solo unos segundos.' : message }}</p>
         <div v-if="status === 'approved'" class="payment-result__email">
           <strong>Tu cuenta Vital 360 está activa</strong>
           <div v-if="customerEmail" class="payment-result__account">
@@ -144,9 +146,15 @@ onMounted(async () => {
 .payment-result--error { background: rgba(#26080b, 0.94); }
 .payment-result section { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 36rem; gap: 1rem; padding: clamp(2rem, 6vw, 4rem); border: 1px solid rgba($primary, 0.25); border-radius: 1.2rem; background: $white; text-align: center; box-shadow: 0 30px 90px rgba($primary-dark, 0.4); }
 .payment-result__panel--error { border: 2px solid $alert-error !important; box-shadow: 0 30px 90px rgba($alert-error, 0.24) !important; }
+.payment-result__panel--loading { border-color: rgba($primary, 0.3); }
 .payment-result section > span { display: flex; justify-content: center; align-items: center; width: 100%; max-width: 4rem; height: 4rem; border-radius: 50%; background: $primary; color: $primary-dark; font-size: 2rem; font-weight: 900; }
 .payment-result section > .payment-result__icon--error { background: $alert-error; color: $white; }
+.payment-result__spinner { max-width: 4rem; height: 4rem; border: 0.32rem solid rgba($primary, 0.22); border-top-color: $primary; background: transparent !important; animation: payment-result-spin 0.75s linear infinite; }
 .payment-result__label { width: 100%; color: $alert-error; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.14em; }
+.payment-result__label--loading { color: $LPB-GREEN-D; animation: payment-result-pulse 1.4s ease-in-out infinite; }
+@keyframes payment-result-spin { to { transform: rotate(360deg); } }
+@keyframes payment-result-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .payment-result__spinner { animation-duration: 1.6s; } .payment-result__label--loading { animation: none; } }
 .payment-result h2 { font-size: clamp(2rem, 5vw, 3.2rem); }
 .payment-result p { width: 100%; color: $text-secondary; line-height: 1.6; }
 .payment-result__email { display: flex; flex-direction: column; width: 100%; gap: 0.45rem; padding: 1rem; border: 1px solid rgba($primary, 0.3); border-radius: 0.7rem; background: $LPB-SURFACE; }
