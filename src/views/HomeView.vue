@@ -8,6 +8,7 @@ import PricingSection from '@/components/funnel/PricingSection.vue'
 import ProblemMethodSection from '@/components/funnel/ProblemMethodSection.vue'
 import ProgramActivityTicker from '@/components/funnel/ProgramActivityTicker.vue'
 import StickyCta from '@/components/funnel/StickyCta.vue'
+import TestimonialsSection from '@/components/funnel/TestimonialsSection.vue'
 import ValueStackSection from '@/components/funnel/ValueStackSection.vue'
 import VslSection from '@/components/funnel/VslSection.vue'
 </script>
@@ -18,6 +19,7 @@ import VslSection from '@/components/funnel/VslSection.vue'
     <VslSection />
     <ProblemMethodSection />
     <AuthorityGallery />
+    <TestimonialsSection />
     <IncludedSection />
     <ValueStackSection />
     <PricingSection />

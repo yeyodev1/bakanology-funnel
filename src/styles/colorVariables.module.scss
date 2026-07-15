@@ -1,24 +1,18 @@
-// Luisa Pita Bejarano
-$LPB-GREEN: #16C784;
-$LPB-GREEN-D: #0A9E68;
-$LPB-BLACK: #0D1117;
-$LPB-DARK: #0D1117;
-$LPB-LIGHT: #F0FFF8;
-$LPB-SURFACE: #F5FFFA;
-
-$LPB-PRIMARY: $LPB-GREEN;
-$LPB-SECONDARY: $LPB-GREEN-D;
-$LPB-ACCENT: $LPB-GREEN;
-
-// Existing semantic names remain available to current components.
-$primary: $LPB-GREEN;
-$primary-dark: $LPB-BLACK;
-$primary-light: $LPB-LIGHT;
-$secondary: $LPB-GREEN-D;
+// Bakanology
+$primary: #e6285c;
+$primary-dark: #191423;
+$primary-light: #f5f3ef;
+$primary-surface: #fffafb;
+$secondary: #85529c;
+$secondary-dark: #5c3070;
 
 $white: #ffffff;
 $text-light: #f5f5f5;
-$text-secondary: #52605b;
+$text-secondary: #6b7280;
+$overlay-purple: rgba($secondary, 0.1);
+
+// Extended brand palette
+$BAKANO-GREEN: #3bb77e;
 
 // Alert colors
 $alert-warning: #f59e0b;

@@ -13,9 +13,9 @@ const toggle = (index: number) => {
   <section id="faq" class="faq section-pad">
     <div class="funnel-container faq__inner">
       <div class="faq__heading">
-        <p class="eyebrow"><span></span> ANTES DE EMPEZAR</p>
-        <h2>Todo lo que necesitas saber sobre Vital 360.</h2>
-        <p class="section-lead">Tu transformación debe comenzar con una decisión clara y segura.</p>
+        <p class="eyebrow"><span></span> PREGUNTAS FRECUENTES</p>
+        <h2>Lo que necesitas saber antes de instalar el sistema.</h2>
+        <p class="section-lead">Bakanology funciona para negocios de productos y servicios, incluso si hoy no dominas la tecnología.</p>
       </div>
       <div class="faq__list">
         <article v-for="(item, index) in faqItems" :key="item.question" class="faq__item" :class="{ 'faq__item--open': openIndex === index }">
@@ -26,8 +26,8 @@ const toggle = (index: number) => {
         </article>
       </div>
       <div class="faq__close">
-        <strong>Tu mejor versión no tiene que seguir esperando.</strong>
-        <a href="#oferta" class="primary-button">QUIERO UNIRME <span>↑</span></a>
+        <strong>Tu próximo cliente no debería depender de la suerte.</strong>
+        <a href="#oferta" class="primary-button">QUIERO DOBLAR MI FACTURACIÓN <span>↑</span></a>
       </div>
     </div>
   </section>
@@ -41,7 +41,7 @@ const toggle = (index: number) => {
   &__heading { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 46rem; gap: 1rem; text-align: center; }
   &__list { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 52rem; gap: 0.7rem; }
   &__item { display: flex; flex-direction: column; width: 100%; overflow: hidden; border: 1px solid rgba($primary-dark, 0.1); border-radius: 0.8rem; transition: border-color 0.25s ease, background 0.25s ease; }
-  &__item--open { border-color: $primary; background: $LPB-SURFACE; }
+  &__item--open { border-color: $primary; background: $primary-surface; }
   button { display: flex; justify-content: center; align-items: center; width: 100%; gap: 1rem; padding: 1.2rem; border: 0; background: transparent; color: $primary-dark; font: inherit; font-weight: 800; text-align: center; cursor: pointer; }
   button span { width: 100%; }
   button b { color: $primary; font-size: 1.5rem; }

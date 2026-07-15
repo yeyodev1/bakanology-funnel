@@ -12,7 +12,7 @@ export function useAnimatedNumber(source: Readonly<Ref<number>>) {
     }
     if (intervalId !== undefined) window.clearInterval(intervalId)
     const direction = next > displayed.value ? 1 : -1
-    const delay = Math.max(20, 500 / Math.abs(next - displayed.value))
+    const delay = Math.max(4, 700 / Math.abs(next - displayed.value))
     intervalId = window.setInterval(() => {
       displayed.value += direction
       if (displayed.value === next && intervalId !== undefined) window.clearInterval(intervalId)

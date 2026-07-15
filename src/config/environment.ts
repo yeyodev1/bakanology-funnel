@@ -1,4 +1,5 @@
 const TESTING_FRONTEND_HOST = 'testing-storybrand-frontend.bakano.ec'
+const PUBLIC_ACADEMY_URL = 'https://bakanology.com/'
 
 export type AppEnvironment = 'local' | 'testing' | 'production'
 
@@ -13,10 +14,7 @@ export function shouldResetOfferState(): boolean {
 }
 
 export function getFrontendBaseUrl(): string {
-  const environment = getAppEnvironment()
-  if (environment === 'local') return 'http://localhost:5173'
-  if (environment === 'testing') return 'https://testing-storybrand-frontend.bakano.ec'
-  return 'https://academia.luisapitabejarano.com'
+  return window.location.origin
 }
 
 export function getPaymentResponseUrl(): string {
@@ -24,11 +22,12 @@ export function getPaymentResponseUrl(): string {
 }
 
 export function getApiBaseUrl(): string {
-  const explicitUrl = import.meta.env.VITE_API_BASE_URL?.trim()
-  if (explicitUrl) return explicitUrl
-
   const environment = getAppEnvironment()
   if (environment === 'local') return 'http://localhost:8101'
   if (environment === 'testing') return 'https://testing-storybrand-backapp.bakano.ec'
-  return 'https://luisa-pita-bejarano-backapp.vercel.app'
+  return 'https://bakanology-backapp.vercel.app'
+}
+
+export function getAcademyLoginUrl(): string {
+  return PUBLIC_ACADEMY_URL
 }

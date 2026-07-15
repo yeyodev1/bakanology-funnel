@@ -6,57 +6,43 @@ interface ApiResponse<T> {
   message: string
 }
 
-export interface PaymentBoxConfig {
-  token: string
-  storeId: string
-  amount: number
-  amountWithoutTax: number
-  currency: 'USD'
+export type CheckoutPlan = 'monthly' | 'lifetime'
+export type CheckoutExtra = 'crm' | 'telegram_vip'
+
+export interface CheckoutSessionResponse {
+  url: string
+  sessionId: string
   clientTransactionId: string
-  reference: string
-  responseUrl: string
 }
 
 export interface ConfirmPaymentResponse {
-  status: 'approved' | 'canceled' | 'failed'
-  transactionId?: number
-  data?: {
-    amount?: number
-    message?: string | null
-    messageCode?: number
-    transactionStatus?: string
-  }
+  status: 'pending' | 'approved' | 'failed' | 'canceled'
   isNewUser?: boolean
   plainPassword?: string
-  emailSent?: boolean
   email?: string
+  stripePaymentStatus?: string
 }
 
 class PaymentService extends APIBase {
-  async prepareBox(payload: {
+  async createCheckoutSession(payload: {
     email: string
     name: string
     lastName: string
-    plan: 'annual' | 'monthly'
-    amount: number
-    extras: string[]
+    plan: CheckoutPlan
+    extras: CheckoutExtra[]
   }) {
-    return this.post<ApiResponse<PaymentBoxConfig>>('payments/prepare-box', {
+    return this.post<ApiResponse<CheckoutSessionResponse>>('stripe/funnel/create-session', {
       ...payload,
       origin: getFrontendBaseUrl(),
     })
   }
 
-  async confirmPayment(id: string, clientTransactionId: string) {
-    return this.get<ApiResponse<ConfirmPaymentResponse>>('payments/confirm', undefined, {
-      params: { id, clientTransactionId },
-    })
+  async verifyPayment(sessionId: string) {
+    return this.get<ApiResponse<ConfirmPaymentResponse>>(`stripe/verify/${encodeURIComponent(sessionId)}`)
   }
 
-  async resendWelcome(clientTransactionId: string) {
-    return this.post<ApiResponse<{ email: string }>>('payments/resend-welcome-public', {
-      clientTransactionId,
-    })
+  async resendWelcomeEmail(sessionId: string) {
+    return this.post<ApiResponse<{ resent: boolean; email: string }>>('stripe/resend-email', { sessionId })
   }
 }
 

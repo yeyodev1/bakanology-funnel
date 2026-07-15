@@ -1,165 +1,67 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useCountdown } from '@/composables/useCountdown'
-import { useAnnualOfferCountdown } from '@/composables/useAnnualOfferCountdown'
-
-const { price } = useCountdown()
-const { isActive: annualOfferActive } = useAnnualOfferCountdown()
-const vipUpgradePrice = Number(import.meta.env.VITE_VIP_UPGRADE_PRICE) || 15
-const regularAnnualValue = 400
-const annualPrice = computed(() => annualOfferActive.value ? 297 : regularAnnualValue)
-const annualSavings = computed(() => regularAnnualValue - annualPrice.value)
-
 const valueItems = [
-  { number: '01', title: 'Plan anual de entrenamiento', text: 'Programación funcional progresiva para avanzar mes a mes.', value: 197 },
-  { number: '02', title: 'Guías de nutrición', text: 'Orientación para alimentarte antes y después de entrenar.', value: 97 },
-  { number: '03', title: 'Sesiones en vivo', text: 'Entrenamientos y espacios grupales guiados por Luisa.', value: 147 },
-  { number: '04', title: 'Comunidad Vital 360', text: 'Acompañamiento para compartir avances y mantenerte enfocada.', value: 97 },
-  { number: '05', title: 'Retos de transformación', text: 'Desafíos periódicos para renovar tu motivación y constancia.', value: 67 },
-  { number: '06', title: 'Biblioteca funcional', text: 'Sesiones organizadas por objetivo, intensidad y nivel.', value: 97 },
-  { number: '07', title: 'Calendario de progreso', text: 'Una ruta clara para registrar hábitos, sesiones y avances.', value: 47 },
-  { number: '08', title: 'Actualizaciones anuales', text: 'Nuevas rutinas, recursos y contenidos durante tu acceso.', value: 47 },
+  { number: '01', title: 'Curso de Ventas por WhatsApp', text: 'Convierte conversaciones en ventas con un proceso claro.', value: 197 },
+  { number: '02', title: 'Tráfico para WhatsApp', text: 'Lleva compradores potenciales directo a tu chat.', value: 197 },
+  { number: '03', title: 'Tráfico para Landing Pages', text: 'Crea campañas que filtran y generan reuniones calificadas.', value: 197 },
+  { number: '04', title: 'Pase VIP semanal', text: 'Acceso a expertos en tecnología, ventas y Meta Ads.', value: 500 },
 ] as const
-
 const totalStackValue = valueItems.reduce((total, item) => total + item.value, 0)
-
-const vipFeatures = [
-  { number: '01', title: 'Comunidad con intención', text: 'Conecta con mujeres que comparten tu compromiso y celebran cada avance contigo.' },
-  { number: '02', title: 'Encuentro mensual con Luisa', text: 'Un espacio VIP para reforzar tu enfoque, resolver bloqueos y seguir avanzando.' },
-  { number: '03', title: 'Retos y objetivos medibles', text: 'Convierte tus metas en acciones concretas que puedas sostener y reconocer.' },
-  { number: '04', title: 'Acompañamiento prioritario', text: 'Comparte tus dudas dentro del círculo y recibe orientación con mayor cercanía.' },
-] as const
 </script>
 
 <template>
   <section class="value-stack section-pad">
     <div class="funnel-container value-stack__inner">
-      <div class="value-stack__heading">
-        <p class="eyebrow"><span></span> 8 ENTREGABLES DENTRO DE VITAL 360</p>
-        <h2>Esto es exactamente lo que recibes al entrar.</h2>
-        <p class="section-lead">Ocho recursos que reúnen entrenamiento, nutrición, seguimiento y comunidad para sostener tu proceso.</p>
-      </div>
-
-      <div class="value-stack__items">
-        <article v-for="item in valueItems" :key="item.number" class="value-stack__item">
-          <span>{{ item.number }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
-          <div class="value-stack__item-value"><small>VALOR REGULAR</small><del>${{ item.value }}</del><strong>GRATIS · $0 ADICIONAL</strong></div>
-        </article>
-      </div>
-
+      <div class="value-stack__heading"><p class="eyebrow"><span></span> TODO LO QUE DESCUBRIRÁS</p><h2>El valor es incalculable cuando el sistema empieza a vender.</h2><p class="section-lead">Recibes el conocimiento, los guiones y los procesos que usamos en Bakano.ec para que puedas construir por tu cuenta una fuente predecible de clientes.</p></div>
+      <div class="value-stack__items"><article v-for="item in valueItems" :key="item.number"><span>{{ item.number }}</span><h3>{{ item.title }}</h3><p>{{ item.text }}</p><div><small>VALOR</small><strong>${{ item.value }}</strong></div></article></div>
       <div class="value-stack__summary">
-        <p>VALOR REFERENCIAL POR SEPARADO</p>
-        <del>${{ totalStackValue }}</del>
-        <span class="value-stack__regular">Precio regular del programa anual: ${{ regularAnnualValue }}</span>
-        <div class="value-stack__prices">
-          <span class="value-stack__recommended"><small>EMPIEZA HOY · LOW TICKET</small><strong>${{ price }}/mes</strong></span>
-          <b>O</b>
-          <span><small>{{ annualOfferActive ? 'OFERTA ANUAL · 2 HORAS' : 'PRECIO ANUAL REGULAR' }}</small><strong>${{ annualPrice }}</strong></span>
-        </div>
-        <p v-if="annualOfferActive" class="value-stack__saving">Durante 2 horas ahorras ${{ annualSavings }}: pagas $297 en lugar del precio normal de $400.</p>
+        <p>VALOR REFERENCIAL POR SEPARADO</p><del>${{ totalStackValue }}</del><span>El valor de saber captar clientes de forma predecible no tiene techo.</span>
+        <div><span class="value-stack__recommended"><small>ACCESO MENSUAL</small><strong>$37/mes</strong></span><b>O</b><span><small>UN SOLO PAGO · PARA SIEMPRE</small><strong>$297</strong></span></div>
       </div>
-
       <div class="vip-upgrade">
-        <div class="vip-upgrade__copy">
-          <p class="eyebrow eyebrow--light"><span></span> UPGRADE EXCLUSIVO</p>
-          <h2>Círculo VIP de Mujeres Vitales</h2>
-          <p>Un espacio íntimo de acompañamiento para mujeres que decidieron dejar de postergarse y avanzar con más enfoque, constancia y confianza.</p>
-          <div class="vip-upgrade__features">
-            <article v-for="feature in vipFeatures" :key="feature.number">
-              <span>{{ feature.number }}</span>
-              <div><strong>{{ feature.title }}</strong><p>{{ feature.text }}</p></div>
-            </article>
-          </div>
-        </div>
-        <div class="vip-upgrade__offer">
-          <span>AGREGA EL NIVEL VIP POR</span>
-          <div><sup>+$</sup><strong>{{ vipUpgradePrice }}</strong><small>pago único</small></div>
-          <p>Disponible como bono al seleccionar la membresía mensual de Vital 360.</p>
-          <a href="#oferta">ELEGIR MI MEMBRESÍA <span>→</span></a>
-          <small>El plan anual de ${{ annualPrice }} ya incluye este beneficio.</small>
-        </div>
+        <div class="vip-upgrade__copy"><p class="eyebrow eyebrow--light"><span></span> DOS POTENCIADORES OPCIONALES</p><h2>Acelera la implementación.</h2><p>Suma infraestructura y acompañamiento directo sin convertir tu operación en otro proyecto interminable.</p><div><article><span>01</span><div><strong>CRM Bakanology</strong><p>Centraliza prospectos y seguimiento. Valorado en $1,164; agrégalo por $15.</p></div></article><article><span>02</span><div><strong>Telegram VIP</strong><p>Conecta con dueños de negocio y recibe soporte cercano por $15.</p></div></article></div></div>
+        <div class="vip-upgrade__offer"><span>ACCESO DE POR VIDA</span><div><sup>$</sup><strong>297</strong></div><p>Un único pago para llevarte todo para siempre, sin suscripciones.</p><a href="#oferta">VER OPCIÓN DE POR VIDA <span>→</span></a><small>Incluye CRM Bakanology y Telegram VIP.</small></div>
       </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.value-stack {
-  background: $white;
-
-  &__inner { flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; }
-  &__heading { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 54rem; gap: 1rem; text-align: center; }
-  &__items { display: flex; justify-content: center; align-items: stretch; flex-wrap: wrap; width: 100%; gap: 1rem; }
-  &__item { display: flex; flex: 1 1 15rem; flex-direction: column; align-items: center; width: 100%; gap: 0.8rem; padding: 1.5rem; border: 1px solid rgba($primary-dark, 0.1); border-radius: 1rem; background: $LPB-SURFACE; text-align: center; transition: transform 0.25s ease, border-color 0.25s ease; }
-  &__item:hover { transform: translateY(-0.35rem); border-color: $primary; }
-  &__item:nth-child(1), &__item:nth-child(8) { border-color: $primary-dark; background: $primary-dark; box-shadow: 0 1rem 2.2rem rgba($primary-dark, 0.14); }
-  &__item:nth-child(1) h3, &__item:nth-child(8) h3 { color: $white; }
-  &__item:nth-child(1) p, &__item:nth-child(8) p { color: rgba($white, 0.72); }
-  &__item:nth-child(1) &__item-value, &__item:nth-child(8) &__item-value { border-top-color: rgba($white, 0.14); }
-  &__item:nth-child(1) &__item-value small, &__item:nth-child(8) &__item-value small { color: rgba($white, 0.58); }
-  &__item:nth-child(1) &__item-value strong, &__item:nth-child(8) &__item-value strong { color: $primary; }
-  &__item:nth-child(2), &__item:nth-child(5) { border-color: #efb8a6; background: #fff0ea; }
-  &__item:nth-child(2) > span, &__item:nth-child(5) > span, &__item:nth-child(2) &__item-value strong, &__item:nth-child(5) &__item-value strong { color: #bf5139; }
-  &__item:nth-child(3), &__item:nth-child(6) { border-color: #b7cdea; background: #edf4ff; }
-  &__item:nth-child(3) > span, &__item:nth-child(6) > span, &__item:nth-child(3) &__item-value strong, &__item:nth-child(6) &__item-value strong { color: #315f96; }
-  &__item:nth-child(4), &__item:nth-child(7) { border-color: #a8dcc2; background: #e8f8f0; }
-  &__item:nth-child(4) > span, &__item:nth-child(7) > span, &__item:nth-child(4) &__item-value strong, &__item:nth-child(7) &__item-value strong { color: $LPB-GREEN-D; }
-  &__item > span { width: 100%; color: $primary; font-size: 12px; font-weight: 900; letter-spacing: 0.1em; }
-  &__item h3 { width: 100%; color: $primary-dark; font-size: 18px; line-height: 1.3; }
-  &__item p { width: 100%; color: $text-secondary; font-size: 15px; line-height: 1.55; }
-  &__item-value { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; width: 100%; gap: 0.45rem; margin-top: auto; padding-top: 0.8rem; border-top: 1px solid rgba($primary-dark, 0.08); }
-  &__item-value small { color: $text-secondary; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; }
-  &__item-value del { color: $alert-error; font-size: 16px; font-weight: 900; text-decoration-thickness: 0.14rem; }
-  &__item-value strong { width: 100%; padding: 0.45rem 0.55rem; border-radius: 0.4rem; background: rgba($primary, 0.14); color: $LPB-GREEN-D; font-size: 12px; letter-spacing: 0.06em; }
-  &__summary { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; gap: 0.8rem; padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: 1.2rem; background: $primary-dark; color: $white; text-align: center; }
-  &__summary > p:first-child { width: 100%; color: $primary; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; }
-  &__summary > del { width: 100%; color: rgba($white, 0.55); font-size: 1.4rem; font-weight: 800; }
-  &__regular { width: 100%; color: rgba($white, 0.72); font-size: 0.82rem; }
-  &__prices { display: flex; justify-content: center; align-items: center; width: 100%; gap: clamp(1rem, 4vw, 3rem); }
-  &__prices > span { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 16rem; }
-  &__recommended { padding: 0.75rem; border: 1px solid $primary; border-radius: 0.7rem; background: rgba($primary, 0.08); }
-  &__prices small { width: 100%; color: rgba($white, 0.55); font-size: 0.62rem; }
-  &__prices strong { width: 100%; color: $primary; font-size: clamp(2rem, 6vw, 3.5rem); }
-  &__prices b { color: rgba($white, 0.45); font-size: 0.75rem; }
-  &__saving { width: 100%; color: rgba($white, 0.72); font-size: 0.8rem; }
-}
-
-.vip-upgrade {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 1.3rem;
-  background: $LPB-GREEN-D;
-  color: $white;
-
-  &__copy, &__offer { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; width: 100%; gap: 1rem; padding: clamp(1.5rem, 5vw, 3rem); text-align: center; }
-  &__copy { align-items: flex-start; text-align: left; }
-  &__copy h2 { width: 100%; color: $white; }
-  &__copy > p:not(.eyebrow) { width: 100%; color: rgba($white, 0.75); line-height: 1.65; }
-  &__features { display: flex; align-items: stretch; flex-wrap: wrap; width: 100%; gap: 0.7rem; }
-  &__features article { display: flex; flex: 1 1 14rem; align-items: flex-start; width: 100%; gap: 0.75rem; padding: 1rem; border: 1px solid rgba($white, 0.14); border-radius: 0.75rem; background: rgba($primary-dark, 0.12); }
-  &__features article > span { display: flex; justify-content: center; align-items: center; width: 100%; max-width: 2rem; height: 2rem; flex-shrink: 0; border: 1px solid rgba($primary, 0.45); border-radius: 50%; color: $primary; font-size: 0.62rem; font-weight: 900; }
-  &__features article > div { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
-  &__features strong { width: 100%; color: $white; font-size: 0.86rem; }
-  &__features article p { width: 100%; color: rgba($white, 0.65); font-size: 0.75rem; line-height: 1.5; }
-  &__offer { justify-content: center; background: $LPB-LIGHT; color: $primary-dark; }
-  &__offer > span { width: 100%; color: $LPB-GREEN-D; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.1em; }
-  &__offer > div { display: flex; justify-content: center; align-items: flex-end; width: 100%; }
-  &__offer sup { align-self: flex-start; padding-top: 0.7rem; color: $LPB-GREEN-D; font-size: 1.4rem; font-weight: 900; }
-  &__offer strong { font-size: clamp(4rem, 10vw, 6rem); line-height: 0.9; letter-spacing: -0.08em; }
-  &__offer small { color: $text-secondary; }
-  &__offer > p { width: 100%; color: $text-secondary; }
-  &__offer a { display: flex; justify-content: center; align-items: center; width: 100%; max-width: 22rem; gap: 0.6rem; padding: 1rem; border-radius: 0.6rem; background: $primary-dark; color: $white; font-weight: 900; text-decoration: none; transition: background 0.25s ease, transform 0.25s ease; }
-  &__offer a:hover { transform: translateY(-0.2rem); background: $LPB-GREEN-D; }
-  &__offer > small { width: 100%; font-size: 0.65rem; }
-}
-
-@media (max-width: 760px) {
-  .value-stack__prices, .vip-upgrade { flex-direction: column; }
-  .value-stack__prices { gap: 0.5rem; }
-}
+.value-stack { background: $white; }
+.value-stack__inner { flex-direction: column; gap: 2.5rem; }
+.value-stack__heading { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 54rem; gap: 1rem; text-align: center; }
+.value-stack__items { display: flex; flex-wrap: wrap; width: 100%; gap: 1rem; }
+.value-stack__items > article { display: flex; flex: 1 1 15rem; flex-direction: column; align-items: center; width: 100%; gap: 0.8rem; padding: 1.6rem; border: 1px solid rgba($secondary, 0.18); border-radius: 1rem; background: $primary-surface; text-align: center; }
+.value-stack__items > article > span { color: $primary; font-size: 0.82rem; font-weight: 900; }
+.value-stack__items h3 { width: 100%; font-size: 1.1rem; }
+.value-stack__items p { width: 100%; color: $text-secondary; font-size: 0.9rem; line-height: 1.55; }
+.value-stack__items article > div { display: flex; justify-content: center; align-items: center; width: 100%; gap: 0.5rem; margin-top: auto; padding-top: 0.8rem; border-top: 1px solid rgba($primary-dark, 0.08); }
+.value-stack__items article > div small { color: $text-secondary; font-size: 0.78rem; font-weight: 900; }
+.value-stack__items article > div strong { color: $secondary-dark; }
+.value-stack__summary { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 1.2rem; padding: clamp(2rem, 5vw, 3.5rem); border-radius: 1.2rem; background: $primary-dark; color: $white; text-align: center; }
+.value-stack__summary > p { color: $primary; font-size: 0.82rem; font-weight: 900; letter-spacing: 0.09em; }
+.value-stack__summary > del { color: rgba($white, 0.5); font-size: 1.5rem; font-weight: 900; }
+.value-stack__summary > span { color: rgba($white, 0.76); font-size: 0.9rem; line-height: 1.5; }
+.value-stack__summary > div { display: flex; justify-content: center; align-items: stretch; width: 100%; gap: clamp(1.5rem, 5vw, 4rem); margin-top: 0.8rem; }
+.value-stack__summary > div > span { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 23rem; min-height: 9rem; gap: 0.8rem; padding: 1.2rem 1.5rem; }
+.value-stack__summary small { display: flex; justify-content: center; align-items: center; min-height: 2.4rem; color: rgba($white, 0.76); font-size: 0.82rem; line-height: 1.4; }
+.value-stack__summary strong { color: $primary; font-size: clamp(2.8rem, 6vw, 4.4rem); line-height: 1; white-space: nowrap; }
+.value-stack__summary b { align-self: center; flex-shrink: 0; }
+.value-stack__recommended { border: 1px solid $primary; border-radius: 0.7rem; background: rgba($primary, 0.1); }
+.vip-upgrade { display: flex; width: 100%; margin-top: 1rem; overflow: hidden; border-radius: 1.3rem; background: $secondary-dark; color: $white; }
+.vip-upgrade__copy, .vip-upgrade__offer { display: flex; flex: 1 1 0; flex-direction: column; align-items: center; width: 100%; gap: 1rem; padding: clamp(1.5rem, 5vw, 3rem); text-align: center; }
+.vip-upgrade h2 { color: $white; }
+.vip-upgrade__copy > p:not(.eyebrow) { color: rgba($white, 0.72); line-height: 1.6; }
+.vip-upgrade__copy > div { display: flex; flex-wrap: wrap; width: 100%; gap: 0.7rem; }
+.vip-upgrade__copy article { display: flex; flex: 1 1 13rem; width: 100%; gap: 0.7rem; padding: 1rem; border: 1px solid rgba($white, 0.14); border-radius: 0.7rem; text-align: left; }
+.vip-upgrade__copy article > span { color: $primary; font-size: 0.78rem; font-weight: 900; }
+.vip-upgrade__copy article > div { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
+.vip-upgrade__copy article p { color: rgba($white, 0.76); font-size: 0.86rem; line-height: 1.55; }
+.vip-upgrade__offer { justify-content: center; background: $primary-light; color: $primary-dark; }
+.vip-upgrade__offer > span { color: $secondary-dark; font-size: 0.82rem; font-weight: 900; letter-spacing: 0.08em; }
+.vip-upgrade__offer > div { display: flex; justify-content: center; align-items: flex-start; width: 100%; }
+.vip-upgrade__offer sup { color: $secondary-dark; font-size: 1.5rem; font-weight: 900; }
+.vip-upgrade__offer strong { font-size: clamp(4rem, 10vw, 6rem); line-height: 0.9; }
+.vip-upgrade__offer a { display: flex; justify-content: center; width: 100%; padding: 1rem; border-radius: 0.6rem; background: $primary-dark; color: $white; font-weight: 900; text-decoration: none; }
+.vip-upgrade__offer small { color: $text-secondary; font-size: 0.82rem; line-height: 1.5; }
+@media (max-width: 760px) { .value-stack__summary > div, .vip-upgrade { flex-direction: column; } .value-stack__summary > div { gap: 0.8rem; } .value-stack__summary > div > span { max-width: none; min-height: 0; } }
 </style>
